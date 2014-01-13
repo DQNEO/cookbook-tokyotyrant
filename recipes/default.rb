@@ -62,5 +62,10 @@ end
 
 template "/usr/local/sbin/ttservctl" do
   source "ttservctl.erb"
+  mode "0755"
 end
 
+link "/etc/init.d/ttservctl" do
+  to "/usr/local/sbin/ttservctl"
+  link_type :symbolic
+end
