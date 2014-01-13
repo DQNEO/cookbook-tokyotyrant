@@ -68,5 +68,11 @@ end
 
 service "ttservd" do
   supports :status => true, :restart => true, :reload => true
-  action [ :enable, :start ]
+  action :enable
+end
+
+# start only if not running
+service "ttservd" do
+  action :start
+  not_if "pgrep ttserver"
 end
