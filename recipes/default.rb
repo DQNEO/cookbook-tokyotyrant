@@ -53,6 +53,7 @@ execute "configure && make tokyotyrant" do
     ./configure
     make
     make install
+    rm /usr/local/sbin/ttservctl
   EOH
 
   not_if { File.exist?("/usr/local/bin/ttserver") }
@@ -60,17 +61,12 @@ execute "configure && make tokyotyrant" do
   action :run
 end
 
-template "/usr/local/sbin/ttservctl" do
+template "/etc/init.d/ttservd" do
   source "ttservctl.erb"
   mode "0755"
 end
 
-link "/etc/init.d/ttservctl" do
-  to "/usr/local/sbin/ttservctl"
-  link_type :symbolic
-end
-
-service "ttservctl" do
+service "ttservd" do
   supports :status => true, :restart => true, :reload => true
   action [ :enable, :start ]
 end
