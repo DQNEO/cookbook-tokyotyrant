@@ -69,3 +69,8 @@ link "/etc/init.d/ttservctl" do
   to "/usr/local/sbin/ttservctl"
   link_type :symbolic
 end
+
+service "ttservctl" do
+  supports :status => true, :restart => true, :reload => true
+  action [ :enable, :start ]
+end
