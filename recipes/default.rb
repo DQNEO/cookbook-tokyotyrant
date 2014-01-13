@@ -59,3 +59,8 @@ execute "configure && make tokyotyrant" do
 
   action :run
 end
+
+template "/usr/local/sbin/ttservctl" do
+  source "ttservctl.erb"
+end
+
