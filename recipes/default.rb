@@ -6,21 +6,21 @@
   end
 end
 
-remote_file "/usr/local/src/tokyocabinet-1.4.48.tar.gz" do
-  source "http://fallabs.com/tokyocabinet/tokyocabinet-1.4.48.tar.gz"
+remote_file "/usr/local/src/tokyocabinet-#{node['tc']['version']}.tar.gz" do
+  source "http://fallabs.com/tokyocabinet/tokyocabinet-#{node['tc']['version']}.tar.gz"
 end
 
 execute "extract tokyocabinet" do
   cwd "/usr/local/src"
   command <<-EOH
-     tar xvfz tokyocabinet-1.4.48.tar.gz
+     tar xvfz tokyocabinet-#{node['tc']['version']}.tar.gz
   EOH
 
-  not_if { File.exist?("/usr/local/src/tokyocabinet-1.4.48/") }
+  not_if { File.exist?("/usr/local/src/tokyocabinet-#{node['tc']['version']}/") }
 end
 
 execute "configure && make tokyocabinet" do
-  cwd "/usr/local/src/tokyocabinet-1.4.48/"
+  cwd "/usr/local/src/tokyocabinet-#{node['tc']['version']}/"
 
   command <<-EOH
     ./configure
@@ -33,21 +33,21 @@ execute "configure && make tokyocabinet" do
   action :run
 end
 
-remote_file "/usr/local/src/tokyotyrant-1.1.41.tar.gz" do
-  source "http://fallabs.com/tokyotyrant/tokyotyrant-1.1.41.tar.gz"
+remote_file "/usr/local/src/tokyotyrant-#{node['tt']['version']}.tar.gz" do
+  source "http://fallabs.com/tokyotyrant/tokyotyrant-#{node['tt']['version']}.tar.gz"
 end
 
 execute "extract tokyotyrant" do
   cwd "/usr/local/src"
   command <<-EOH
-     tar xvfz tokyotyrant-1.1.41.tar.gz
+     tar xvfz tokyotyrant-#{node['tt']['version']}.tar.gz
   EOH
 
-  not_if { File.exist?("/usr/local/src/tokyotyrant-1.1.41") }
+  not_if { File.exist?("/usr/local/src/tokyotyrant-#{node['tt']['version']}") }
 end
 
 execute "configure && make tokyotyrant" do
-  cwd "/usr/local/src/tokyotyrant-1.1.41/"
+  cwd "/usr/local/src/tokyotyrant-#{node['tt']['version']}/"
 
   command <<-EOH
     ./configure
