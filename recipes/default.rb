@@ -28,7 +28,7 @@ execute "configure && make tokyocabinet" do
     make install
   EOH
 
-  #not_if { File.exist?("#{node['home']}/local/bin/convert") }
+  not_if { File.exist?("/usr/local/bin/tchmgr") }
 
   action :run
 end
@@ -55,7 +55,7 @@ execute "configure && make tokyotyrant" do
     make install
   EOH
 
-  #not_if { File.exist?("#{node['home']}/local/bin/convert") }
+  not_if { File.exist?("/usr/local/bin/ttserver") }
 
   action :run
 end
