@@ -9,7 +9,7 @@ cmd="/usr/local/bin/ttserver"
 basedir="/var/ttserver"
 port="1978"
 pidfile="$basedir/pid"
-#logfile="$basedir/log"
+logfile="<%= node['tt']['logfile'] %>"
 #ulogdir="$basedir/ulog"
 #ulimsiz="256m"
 #sid=1
