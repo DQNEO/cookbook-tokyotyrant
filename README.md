@@ -1,6 +1,14 @@
-# This cookbook installs TokyoTyrant and TokyoCabinet
-# TokyoTyrant & TokyoCabinetをインストールする
-# 
+# A cookbook to install TokyoTyrant and TokyoCabinet
+
+TokyoTyrant & TokyoCabinetをインストールする
+
+このCookbookがやっていることを手順書にすると以下のような感じです。
+
+逆に言うと、このCookbookを使えば以下の作業を全部自動でやってくれます。
+
+素敵！
+
+## インストール
 
 ```
 # ソースコードを取得してインストール
@@ -22,6 +30,13 @@ cd ../tokyotyrant-1.1.41
 make
 sudo make install
 
+# 起動スクリプトを作る
+sudo mv /usr/local/sbin/ttservctl /etc/init.d/ttservd
+```
+
+## 動作確認
+
+```
 # 起動テスト
 sudo /usr/local/sbin/ttservctl start
 
@@ -32,21 +47,11 @@ get foo
 
 # テスト終了
 sudo /usr/local/sbin/ttservctl stop
-
-# 起動スクリプトを作る
-sudo mv /usr/local/sbin/ttservctl /etc/init.d/ttservd
-sudo nano /etc/init.d/ttserv  # 適宜修正
-
-# 自動起動設定
-sudo /sbin/chkconfig --list
-sudo /sbin/chkconfig --add ttservd
-sudo /sbin/chkconfig ttservd on
-
-# サーバ再起動して、ttservdが自動起動するか確認
-sudo /sbin/shutdown -r now
 ```
 
-# 起動スクリプトを修正
+## 起動スクリプトを修正
+
+`sudo nano /etc/init.d/ttserv`
 
 ```
 diff --git a/etc/init.d/ttservd b/etc/init.d/ttservd
@@ -82,4 +87,18 @@ index 596302e..e96a7c8 100755
 -dbname="$basedir/casket.tch#bnum=1000000" 
 +dbname="$basedir/casket.tch#bnum=1000000#dfunit=8" 
  retval=0
+```
+
+## 自動起動設定
+
+```
+sudo /sbin/chkconfig --list
+sudo /sbin/chkconfig --add ttservd
+sudo /sbin/chkconfig ttservd on
+```
+
+最後にサーバを再起動して、ttservdが自動起動するか確認しましょう。
+
+```
+sudo /sbin/shutdown -r now
 ```
