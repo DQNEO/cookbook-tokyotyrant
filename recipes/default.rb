@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-
-%w{gcc make zlib-devel bzip2-devel telnet}.each do |pkg|
+%w{gcc make zlib-devel bzip2-devel}.each do |pkg|
   package pkg do
     action :install
   end
