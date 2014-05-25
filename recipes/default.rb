@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-%w{gcc make zlib-devel bzip2-devel}.each do |pkg|
+include_recipe "build-essential::default"
+
+%w{zlib-devel bzip2-devel}.each do |pkg|
   package pkg do
     action :install
   end
