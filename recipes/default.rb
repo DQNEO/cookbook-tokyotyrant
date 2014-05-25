@@ -71,11 +71,5 @@ end
 # register as as service
 service "ttservd" do
   supports :status => true, :restart => true, :reload => true
-  action :enable
-end
-
-# start only if not running
-service "ttservd" do
-  action :start
-  not_if "pgrep ttserver"
+  action [:enable, :start]
 end
