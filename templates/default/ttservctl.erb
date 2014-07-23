@@ -39,9 +39,15 @@ start(){
     retval=1
   elif [ -f "$pidfile" ] ; then
     pid=`cat "$pidfile"`
-    printf 'Existing process: %d\n' "$pid"
-    retval=0
-  else
+    if ps -p $pid > /dev/null ; then
+	printf 'Existing process: %d\n' "$pid"
+	retval=1
+    else
+	rm -f $pidfile
+    fi
+  fi
+
+  if [ $retval -eq 0 ] ; then
     cmd="$cmd -port $port -dmn -pid $pidfile"
     if [ -n "$logfile" ] ; then
       cmd="$cmd -log $logfile"
