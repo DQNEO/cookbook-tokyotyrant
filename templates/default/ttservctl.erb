@@ -41,7 +41,8 @@ start(){
     pid=`cat "$pidfile"`
     if ps -p $pid > /dev/null ; then
 	printf 'Existing process: %d\n' "$pid"
-	retval=1
+	retval=0
+	return ;
     else
 	rm -f $pidfile
     fi
