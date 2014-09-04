@@ -148,6 +148,10 @@ start)
 stop)
   stop
   ;;
+status)
+  status -p "$pidfile" $prog
+  retval=$?
+  ;;
 restart)
   stop
   start
@@ -156,7 +160,7 @@ hup)
   hup
   ;;
 *)
-  printf 'Usage: %s {start|stop|restart|hup}\n' "$prog"
+  printf 'Usage: %s {start|stop|status|restart|hup}\n' "$prog"
   exit 1
   ;;
 esac
