@@ -19,6 +19,8 @@ logfile="<%= node['tt']['logfile'] %>"
 dbname="$basedir/<%= node['tt']['dbname'] %>#bnum=1000000"
 retval=0
 
+# Source function library
+. /etc/rc.d/init.d/functions
 
 # setting environment variables
 LANG=C
