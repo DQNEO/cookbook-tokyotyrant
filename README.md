@@ -51,43 +51,7 @@ sudo /usr/local/sbin/ttservctl stop
 
 ## 起動スクリプトを修正
 
-`sudo nano /etc/init.d/ttserv`
-
-```
-diff --git a/etc/init.d/ttservd b/etc/init.d/ttservd
-index 596302e..e96a7c8 100755
---- a/etc/init.d/ttservd
-+++ b/etc/init.d/ttservd
-@@ -1,4 +1,7 @@
- #! /bin/sh
-+# chkconfig: 345 65 55
-+# description: Startup script for the server of Tokyo Tyrant For Session
-+# processname: tokyotyrant
-
- #----------------------------------------------------------------
- # Startup script for the server of Tokyo Tyrant
-@@ -6,19 +9,19 @@
-
- # configuration variables
--prog="ttservctl" 
--cmd="ttserver" 
-+prog="ttservd" 
-+cmd="/usr/local/bin/ttserver" 
- basedir="/var/ttserver" 
- port="1978" 
- pidfile="$basedir/pid" 
--#logfile="$basedir/log" 
-+logfile="/var/log/ttserver.log" 
- #ulogdir="$basedir/ulog" 
- #ulimsiz="256m" 
- #sid=1
- #mhost="remotehost1" 
- #mport="1978" 
- #rtsfile="$basedir/rts" 
--dbname="$basedir/casket.tch#bnum=1000000" 
-+dbname="$basedir/casket.tch#bnum=1000000#dfunit=8" 
- retval=0
-```
+(git logを見ればわかるので省略)
 
 ## 自動起動設定
 
