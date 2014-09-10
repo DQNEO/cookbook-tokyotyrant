@@ -20,6 +20,8 @@ dbname="$basedir/<%= node['tt']['dbname'] %>#bnum=1000000"
 maxcon="65536"
 retval=0
 
+# Source function library
+. /etc/rc.d/init.d/functions
 
 # setting environment variables
 LANG=C
@@ -150,6 +152,10 @@ start)
 stop)
   stop
   ;;
+status)
+  status -p "$pidfile" $prog
+  retval=$?
+  ;;
 restart)
   stop
   start
@@ -158,7 +164,7 @@ hup)
   hup
   ;;
 *)
-  printf 'Usage: %s {start|stop|restart|hup}\n' "$prog"
+  printf 'Usage: %s {start|stop|status|restart|hup}\n' "$prog"
   exit 1
   ;;
 esac
