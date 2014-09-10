@@ -62,11 +62,7 @@ execute "configure && make tokyotyrant" do
   action :run
 end
 
-# put init script
-template "/etc/init.d/ttservd" do
-  source "ttservctl.erb"
-  mode "0755"
-end
+include_recipe "tokyotyrant::init"
 
 # register as as service
 service "ttservd" do
