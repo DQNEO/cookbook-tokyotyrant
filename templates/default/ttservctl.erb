@@ -17,6 +17,7 @@ logfile="<%= node['tt']['logfile'] %>"
 #mport="1978"
 #rtsfile="$basedir/rts"
 dbname="$basedir/<%= node['tt']['dbname'] %>#bnum=1000000"
+maxcon="65536"
 retval=0
 
 
@@ -49,6 +50,9 @@ start(){
   fi
 
   if [ $retval -eq 0 ] ; then
+    if [ -n "$maxcon" ] ; then
+      ulimit -n "$maxcon" >/dev/null 2>&1
+    fi
     cmd="$cmd -port $port -dmn -pid $pidfile"
     if [ -n "$logfile" ] ; then
       cmd="$cmd -log $logfile"
